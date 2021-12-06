@@ -24,13 +24,22 @@ const holidays = {
     '12-25': 'Christmas Day',
 }
 
-let date = new Date();
-let day = date.getDate();
-let tomorrow = date.setDate(date.getDate() + 1);
-// let yesterday = date.setDate(today - 1);
-// let m = date.getMonth();
-// let y = date.getFullYear();
+function willTheMailManCumToday(holidays = {}) {
+    const d = new Date();
+    const isSaturday = d.getDay() == 6 ? true : false;
+    const isSunday = d.getDay() == 0 ? true : false;
+    const day = '0' + d.getDate();
+    day.slice(-2);
+    const month = d.getMonth();
+    const year = d.getFullYear();
 
-// console.log(d + " " + m + " " + y);
+    // d.setDate(d.getDate() + 1);
+    // let tomorrow = d.getDate();
+    // d.setDate(d.getDate() - 2);
+    // const yesterday = d.getDate();
 
-console.log(day)
+
+    console.log(month + " " + day + " " + year);
+}
+
+willTheMailManCumToday(holidays)
