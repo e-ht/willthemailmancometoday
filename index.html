@@ -2,31 +2,71 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--    <meta name="description" content="TODO" />-->
+<!--    <meta name="keywords" content="TODO" />-->
     <meta name="copyright" content="2010 H and J"/>
     <title>Will The Mailman Come Today?</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
         body
         {
-            background-color: #FFF;
-        }
-        .answer
-        {
-            padding-top: 120px;
-            font-weight: bold;
-            font-size: 120pt;
             font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background-color: #FFF;
+            /*text-decoration: none;*/
+            color: #000;
+
+        }
+        .maintext
+        {
+            font-weight: bold;
+            padding-top: 120px;
+            padding-bottom: 120px;
+            font-size: 120pt;
             text-decoration: none;
             text-align: center;
-            color: #000;
+        }
+        .subtext, .observed
+        {
+            font-weight: bold;
+            font-size: 28pt;
+            text-align: center;
+        }
+        .observed
+        {
+            font-size: 8pt;
+            float: right;
+            padding-right: 10px;
+        }
+        .footer
+        {
+            position: absolute;
+            bottom: 1%;
+            right: 1%;
+        }
+        .plus
+        {
+            color: #439932;
+            text-decoration: none;
+            font-weight: bold;
         }
     </style>
+    <script src="javascript.js"></script>
 </head>
 <body>
-<p class="answer">MAYBE?!</p>
+<div id="page-container">
+    <div id="content-container">
+        <p id="maintext" class="maintext">yesdsd a!</p>
+        <p id="subtext" class="subtext">yesdsd a!</p>
+        <p id="subsubtext" class="observed">yesdsd a!</p>
+    </div>
+    <footer class="footer">
+        <a class="plus" href="#">[+]</a>
+    </footer>
+</div>
 </body>
-<script>
-    console.log("what date is it bro?");
-    const d = new Date();
-    console.log(d);
-</script>
 </html>

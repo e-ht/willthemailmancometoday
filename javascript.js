@@ -11,17 +11,16 @@
 */
 
 const holidays = {
-    '1-01': 'New Year\'s day',
-    '1-17': 'Martin Luther King Jr birthday',
-    '2-21': 'Presidents\'s Day',
-    '5-30': 'Memorial Day',
-    '6-20': 'Juneteenth National Independence Day',
-    '7-04': 'Independance Day',
-    '9-05': 'Labor Day',
+    '01-01': 'New Year\'s day',
+    '01-17': 'Martin Luther King Jr birthday',
+    '02-21': 'Presidents\'s Day',
+    '05-30': 'Memorial Day',
+    '06-20': 'Juneteenth National Independence Day',
+    '07-04': 'Independance Day',
+    '09-05': 'Labor Day',
     '10-10': 'Columbus Day',
     '11-11': 'Veterans Day',
     '11-24': 'Thanksgiving Day',
-    '12-6': 'j day',
     '12-25': 'Christmas Day',
 }
 
@@ -29,37 +28,64 @@ function willTheMailManCumToday() {
     let holiday_today = false;
     let holiday_tomorrow = false;
     let holiday_yesterday = false;
-    let friday = false;
     let saturday = false;
     let sunday = false;
-    const message = [];
+    let maintext = 'No';
+    let subtext = '';
+    let subsubtext = '';
 
     const d = new Date();
+
+    // today
     const today = d.getMonth() + 1 + '-'+ d.getDate();
     if (today in holidays) {
         holiday_today = !holiday_today
-        friday = d.getDay() == 5 ? true : false;
-        saturday = d.getDay() == 6 ? true : false;
-        sunday = d.getDay() == 0 ? true : false;
+        saturday = d.getDay() === 6;
+        sunday = d.getDay() === 0;
     }
 
+    // tomorrow
     d.setDate(d.getDate() + 1);
     const tomorrow = d.getMonth() + 1 + '-'+ d.getDate();
     if (tomorrow in holidays) {
         holiday_tomorrow = !holiday_tomorrow
-        friday = d.getDay() == 5 ? true : false;
-        saturday = d.getDay() == 6 ? true : false;
-        sunday = d.getDay() == 0 ? true : false;
+        saturday = d.getDay() === 6;
+        sunday = d.getDay() === 0;
     }
 
+    // yesterday
     d.setDate(d.getDate() - 2);
     const yesterday = d.getMonth() + 1 + '-'+ d.getDate();
     if (yesterday in holidays) {
         holiday_yesterday = !holiday_yesterday
-        friday = d.getDay() == 5 ? true : false;
-        saturday = d.getDay() == 6 ? true : false;
-        sunday = d.getDay() == 0 ? true : false;
+        saturday = d.getDay() === 6
+        sunday = d.getDay() === 0
     }
+
+    if (holiday_today) {
+        subtext = 'IT\'S ' + holidays[today];
+    }
+    else if (holiday_tomorrow && saturday) {
+        subtext = 'IT\'S ' + holidays[tomorrow] + '*';
+        subsubtext = '*observed';
+    }
+    else if (holiday_yesterday && sunday) {
+        subtext = 'IT\'S ' + holidays[tomorrow] + '(observed)';
+        subsubtext = '*observed';
+    }
+    else if (sunday) {
+        subtext = 'It\s Sunday... Dudley.'
+    }
+    else {
+        maintext = "Yes"
+    }
+
+    document.getElementById('maintext').innerHTML = maintext.toUpperCase();
+    document.getElementById('subtext').innerHTML = subtext.toUpperCase();
+    document.getElementById('subsubtext').innerHTML = subsubtext.toUpperCase();
+
+    setTimeout(willTheMailManCumToday, 5000);
+
 }
 
-willTheMailManCumToday()
+window.onload = willTheMailManCumToday;
